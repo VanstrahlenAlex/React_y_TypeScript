@@ -1,15 +1,18 @@
 
+import { useReducer } from "react";
 import { menuItems } from "./data/db"
 import MenuItem from "./components/MenuItem";
 import useOrder from "./hooks/useOrder";
 import OrderContents from "./components/OrderContents";
 import OrderTotals from "./components/OrderTotals";
 import TipPercentageForm from "./components/TipPercentageForm";
+import { orderReducer, initialState } from "./reducer/order-reducer";
 
 function App() {
 	
 	const {order, addItem, removeItem, tip, setTip, placeOrder} = useOrder();
 
+	const [state, dispatch] = useReducer(orderReducer, initialState);
 	return (		
 		<>
 			<header className="bg-teal-400 py-5">
@@ -24,7 +27,7 @@ function App() {
 							<MenuItem 
 								key={item.id} 
 								item={item}
-								addItem={addItem}
+								dispatch={dispatch}
 							/>
 						))}
 					</div>
