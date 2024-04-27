@@ -42,8 +42,8 @@ export const createProduct = async (req: Request, res : Response) => {
 	//Logic
 	try {
 		const product = await Product.create(req.body)
-	
-		res.send({data: product});
+		
+		res.status(201).json({data: product});
 	} catch (error) {
 		console.log(signale.error(colors.red("Error en el trycatch de createProduct en product.ts en handlres") ));
 		

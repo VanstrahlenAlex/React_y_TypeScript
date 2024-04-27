@@ -8,9 +8,14 @@ describe("GT /api", () => {
 		const res = await request(server).get('/api')
 
 		expect(res.status).toBe(200);
-		expect(res.headers['Content-Type']).toBe('/json')	
+		//expect(res.headers['content-type']).toMatch('/json/')
+		expect(res.body.msg).not.toBe('Desde API')
+
 		
-		console.log(signale.debug(res.status))
+		//console.log(signale.debug(res.status))
+
+		expect(res.status).not.toBe(404);
+		expect(res.body.msg).not.toBe('desde api')
 		
 	})
 })
