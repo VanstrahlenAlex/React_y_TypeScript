@@ -5,24 +5,17 @@ import Product from "../models/Product.model";
 
 export const getProducts = async (req: Request, res: Response) => {
 	console.log(signale.info(colors.bgWhite.black.bold("Iniciando desde la funcion 001 de getProducts en product.ts en handlres") ));
-	try {
-		const products = await Product.findAll({
+	const products = await Product.findAll({
 			order: [
 				['price', 'DESC']
 			], 
 		});
 		res.json({data: products})
-	} catch (error) {
-		console.log(signale.error(colors.red("Error en el trycatch de getProducts en product.ts en handlres") ));
-		console.log(signale.error(colors.red(error)));
-		
-	}
 }
 
 export const getProductById = async (req: Request, res: Response) => {
 	console.log(signale.info(colors.bgWhite.black.bold("Iniciando desde la funcion 002 de getProductById en product.ts en handlres") ));
-	try {
-		const { id } = req.params;
+	const { id } = req.params;
 		const product = await Product.findByPk(id);
 		if(!product) {
 			return res.status(404).json({
@@ -30,33 +23,20 @@ export const getProductById = async (req: Request, res: Response) => {
 			})
 		}
 		res.json({data: product})
-	} catch (error) {
-		console.log(signale.error(colors.red("Error en el trycatch de getProductById en product.ts en handlres") ));
-		console.log(signale.error(colors.red(error)));
-		
-	}
 }
 
 export const createProduct = async (req: Request, res : Response) => {
 	console.log(signale.info(colors.bgWhite.black.bold("Iniciando desde la funcion 003 de createProduct en product.ts en handlres") ));
 	//Logic
-	try {
-		const product = await Product.create(req.body)
+	const product = await Product.create(req.body)
 		
 		res.status(201).json({data: product});
-	} catch (error) {
-		console.log(signale.error(colors.red("Error en el trycatch de createProduct en product.ts en handlres") ));
-		
-		console.log(signale.error(colors.red(error)));
-		
-	}
 	
 }
 
 export const updateProduct = async (req: Request, res: Response) => {
 	console.log(signale.info(colors.bgWhite.black.bold("Iniciando desde la funcion 004 de updateProduct en product.ts en handlres") ));
-	try{
-		const { id } = req.params;
+	const { id } = req.params;
 		const product = await Product.findByPk(id);
 		if(!product) {
 			return res.status(404).json({
@@ -70,11 +50,6 @@ export const updateProduct = async (req: Request, res: Response) => {
 		await product.save();
 		
 		res.json({data: product})
-	} catch(error) {
-		console.log(signale.error(colors.red("Error en el trycatch de updateProduct en product.ts en handlres") ));
-		
-		console.log(signale.error(colors.red(error)));
-	}
 }
 
 export const updateAvailability = async (req: Request, res: Response) => {
@@ -90,7 +65,6 @@ export const updateAvailability = async (req: Request, res: Response) => {
 		//Update value 
 		product.availability =!product.availability;
 		await product.save();
-		
 		res.json({data: product})
 }
 

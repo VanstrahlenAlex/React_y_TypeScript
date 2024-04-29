@@ -5,7 +5,7 @@ import router from './router';
 import db from './config/db';
 
 //Connecting to the database - START
-async function connectDB() {
+export async function connectDB() {
 	try {
 		await db.authenticate();
 		db.sync();
