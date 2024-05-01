@@ -7,7 +7,7 @@ export const getProducts = async (req: Request, res: Response) => {
 	console.log(signale.info(colors.bgWhite.black.bold("Iniciando desde la funcion 001 de getProducts en product.ts en handlres") ));
 	const products = await Product.findAll({
 			order: [
-				['price', 'DESC']
+				['id', 'DESC']
 			], 
 		});
 		res.json({data: products})
